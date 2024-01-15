@@ -125,8 +125,36 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let resultNum = '';
+  let newNum = num;
+
+  while (newNum >= 10) {
+    resultNum += 'X';
+    newNum -= 10;
+  }
+
+  if (newNum === 9) {
+    resultNum += 'IX';
+    return resultNum;
+  }
+
+  if (newNum >= 5) {
+    resultNum += 'V';
+    newNum -= 5;
+  }
+
+  if (newNum === 4) {
+    resultNum += 'IV';
+    return resultNum;
+  }
+
+  while (newNum > 0) {
+    resultNum += 'I';
+    newNum -= 1;
+  }
+
+  return resultNum;
 }
 
 /**
@@ -144,8 +172,66 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let numberInWord = '';
+  let isFirstWord = true;
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    let word = '';
+
+    switch (char) {
+      case '-':
+        word = 'minus';
+        break;
+      case '.':
+      case ',':
+        word = 'point';
+        break;
+      case '0':
+        word = 'zero';
+        break;
+      case '1':
+        word = 'one';
+        break;
+      case '2':
+        word = 'two';
+        break;
+      case '3':
+        word = 'three';
+        break;
+      case '4':
+        word = 'four';
+        break;
+      case '5':
+        word = 'five';
+        break;
+      case '6':
+        word = 'six';
+        break;
+      case '7':
+        word = 'seven';
+        break;
+      case '8':
+        word = 'eight';
+        break;
+      case '9':
+        word = 'nine';
+        break;
+      default:
+        break;
+    }
+
+    if (word) {
+      if (!isFirstWord) {
+        numberInWord += ' ';
+      }
+      numberInWord += word;
+      isFirstWord = false;
+    }
+  }
+
+  return numberInWord;
 }
 
 /**
